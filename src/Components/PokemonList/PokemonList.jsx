@@ -1,21 +1,39 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import "./PokemonList.css";
+
 import Pokemon from "../Pokemon/Pokemon";
+import "./PokemonList.css";
 
 function PokemonList(){
 
-    const [pokemonList, setPokemonList]= useState([]);
-    const [isLoading, setIsLoading]=useState(true);
+const [pokemonList, setPokemonList]= useState([]);
+const [isLoading, setIsLoading]=useState(true);
+const [PokedexUrl,setPokedexUrl] = useState('https://pokeapi.co/api/v2/pokemon');
 
+const [nextUrl, setNextUrl] = useState('');
+const [prevUrl, setPrevUrl] = useState('');
 
 async function downloadPokemons(){
-    const response = await axios.get('https://pokeapi.co/api/v2/pokemon');
-    const pokemonResults = response.data.results; 
+    setIsLoading(true);
+    const response = await axios.get(PokedexUrl);// this downloads list of 20 pokemon
+
+    const pokemonResults = response.data.results; // we get the array of pokemons from result
+
+    console.log(response.data);
+
+    //iterating over the array of pokemons , and using their url, to create an array of promises
+    // that will download those 20 pokemons
     const pokemonResultPromise=pokemonResults.map((pokemon) => axios.get(pokemon.url));
-    const pokemonData = await axios.all(pokemonResultPromise);
+
+    // passing that promise array to axios.all
+    const pokemonData = await axios.all(pokemonResultPromise);// array of 20 pokemon detailed data
     console.log(pokemonData);
-    const res= pokemonData.map((pokeData) => {
+    setNextUrl(response.data.next);
+    setPrevUrl(response.data.previous);
+
+
+    // now iterate on the data of each pokemon, and extract id, name, images , types 
+    const pokeListResult= pokemonData.map((pokeData) => {
         const pokemon = pokeData.data;
         return {
                 id: pokemon.id,
@@ -24,20 +42,27 @@ async function downloadPokemons(){
                 types:pokemon.types
             }
     });
-    console.log(res);
-    setPokemonList(res);
+    console.log(pokeListResult);
+    setPokemonList(pokeListResult);
     setIsLoading(false);
     }
  
     useEffect(()=>{
         downloadPokemons();
-    },[]);
+    },[PokedexUrl]);
 
     return <div  className="pokemon-List-wrapper">
        <div>Pokemon List</div> 
-        {( isLoading) ? 'Loading.....':
-              pokemonList.map((p) => <Pokemon name={p.name} image={p.image} key={p.id} /> )
+       <div className="pokmon-wrapper">
+           {( isLoading) ? 'Loading.....':
+              pokemonList.map((p) => <Pokemon name={p.name} image={p.image} key={p.id} id={p.id} /> )
         }
+       </div>
+       <div className="controls">
+        <button disabled={prevUrl == null} onClick={()=> setPokedexUrl(prevUrl)}>Prev</button>
+        <button  data-url={nextUrl == null}onClick={()=> setPokedexUrl(nextUrl)}>Next</button>
+       </div>
+     
 
     </div>
 }

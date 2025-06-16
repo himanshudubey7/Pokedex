@@ -1,0 +1,9 @@
+
+.pokemon{
+    
+    flex-basis: 30%;
+    height: 200px;
+}
+.pokemon > img{
+    height:100%;
+}

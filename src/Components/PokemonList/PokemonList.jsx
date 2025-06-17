@@ -6,20 +6,43 @@ import "./PokemonList.css";
 
 function PokemonList(){
 
-const [pokemonList, setPokemonList]= useState([]);
-const [isLoading, setIsLoading]=useState(true);
-const [PokedexUrl,setPokedexUrl] = useState('https://pokeapi.co/api/v2/pokemon');
+// const [pokemonList, setPokemonList]= useState([]);
+// const [isLoading, setIsLoading]=useState(true);
+// const [PokedexUrl,setPokedexUrl] = useState('https://pokeapi.co/api/v2/pokemon');
 
-const [nextUrl, setNextUrl] = useState('');
-const [prevUrl, setPrevUrl] = useState('');
+// const [nextUrl, setNextUrl] = useState('');
+// const [prevUrl, setPrevUrl] = useState('');
+
+const [pokemonListState, setPokemonListState] = useState ({
+    pokemonList:[],
+    isLoading:true,
+    pokedexUrl:'https://pokeapi.co/api/v2/pokemon',
+    nextUrl: '',
+    prevUrl: ''
+});
 
 async function downloadPokemons(){
-    setIsLoading(true);
-    const response = await axios.get(PokedexUrl);// this downloads list of 20 pokemon
+    // setIsLoading(true);
+    setPokemonListState((state)=>({...state, isLoading:true}));
+    const response = await axios.get(pokemonListState.pokedexUrl);// this downloads list of 20 pokemon
 
     const pokemonResults = response.data.results; // we get the array of pokemons from result
+    
 
-    console.log(response.data);
+    console.log("response is ", response.data , response.data.next);
+     console.log(pokemonListState);
+    // setPokemonListState(()=>({
+    //     ...pokemonListState, 
+
+        setPokemonListState((state)=>( {
+            ...state, 
+            nextUrl:response.data.next,
+            prevUrl:response.data.previous
+        })); 
+
+       
+    // }));
+
 
     //iterating over the array of pokemons , and using their url, to create an array of promises
     // that will download those 20 pokemons
@@ -28,8 +51,8 @@ async function downloadPokemons(){
     // passing that promise array to axios.all
     const pokemonData = await axios.all(pokemonResultPromise);// array of 20 pokemon detailed data
     console.log(pokemonData);
-    setNextUrl(response.data.next);
-    setPrevUrl(response.data.previous);
+    // setPokemonListState({...pokemonListState,nextUrl: response.data.next});
+    // setPrevUrl(response.data.previous);
 
 
     // now iterate on the data of each pokemon, and extract id, name, images , types 
@@ -43,28 +66,39 @@ async function downloadPokemons(){
             }
     });
     console.log(pokeListResult);
-    setPokemonList(pokeListResult);
-    setIsLoading(false);
+    setPokemonListState((state)=>({
+        ...state,
+        pokemonList:pokeListResult,
+        isLoading:false
+    }));
+   
     }
  
     useEffect(()=>{
         downloadPokemons();
-    },[PokedexUrl]);
+    },[pokemonListState.pokedexUrl]);
 
-    return <div  className="pokemon-List-wrapper">
-       <div>Pokemon List</div> 
-       <div className="pokmon-wrapper">
-           {( isLoading) ? 'Loading.....':
-              pokemonList.map((p) => <Pokemon name={p.name} image={p.image} key={p.id} id={p.id} /> )
+    return (
+   <div  className="pokemon-List-wrapper">
+      <div className="pokemon-wrapper">
+           {( pokemonListState.isLoading) ? 'Loading.....':
+              pokemonListState.pokemonList.map((p) => <Pokemon name={p.name} image={p.image} key={p.id} id={p.id} /> )
         }
        </div>
        <div className="controls">
-        <button disabled={prevUrl == null} onClick={()=> setPokedexUrl(prevUrl)}>Prev</button>
-        <button  data-url={nextUrl == null}onClick={()=> setPokedexUrl(nextUrl)}>Next</button>
+        <button disabled={pokemonListState.prevUrl == null} onClick={()=>{
+            const UrlToset= pokemonListState.prevUrl;
+            setPokemonListState ({...pokemonListState, pokedexUrl:UrlToset})
+            }}>Prev</button>
+        <button  disabled={pokemonListState.nextUrl == null}onClick={()=>{ 
+             const UrlToset= pokemonListState.nextUrl;
+            setPokemonListState ({...pokemonListState, pokedexUrl:UrlToset})
+            }}>Next</button>
        </div>
      
 
     </div>
+    );
 }
 
 

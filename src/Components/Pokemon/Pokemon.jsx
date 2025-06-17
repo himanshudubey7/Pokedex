@@ -6,10 +6,11 @@ function Pokemon({ name, image,id  }) {
         <div className="pokemon">
           <Link to={`/pokemon/${id}`}>
 
-           <div className='pokemon-name'>{name}</div> 
+          
             <div>
-                <img className= 'pokemon-name' src={image} alt={name} />
+                <img className= 'pokemon-image' src={image} alt={name} />
             </div>
+             <div className='pokemon-name'>{name}</div> 
             
               </Link>
         </div>

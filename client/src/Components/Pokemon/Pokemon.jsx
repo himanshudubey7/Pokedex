@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import './pokemon.css'
+import './Pokemon.css'
 
 function Pokemon({ name, image,id  }) {
     return (
@@ -14,7 +14,7 @@ function Pokemon({ name, image,id  }) {
             
               </Link>
         </div>
-      
+    
     );
 }
 

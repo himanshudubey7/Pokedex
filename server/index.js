@@ -7,18 +7,17 @@ import axios from 'axios';
 const app = express();
 app.use(express.json());
 
-
+// Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 
-
-app.use(express.json());
-app.use('/api/auth', authRoutes);
-
+// Fetch and filter Pokémon from external API
 app.get('/pokemon', async (req, res) => {
   const { page = 1, type, search } = req.query;
   const limit = 20;
   const offset = (page - 1) * limit;
 
+  // Handle search by name
   if (search) {
     try {
       const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${search.toLowerCase()}`);
@@ -47,7 +46,7 @@ app.get('/pokemon', async (req, res) => {
     }
   }
 
- 
+  // Fetch paginated list
   try {
     const response = await axios.get(
       `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
@@ -91,11 +90,8 @@ app.get('/pokemon', async (req, res) => {
   }
 });
 
-
-
-
-const PORT = 5000;
-app.listen(PORT, async() => {
-   await connectionToDB();
-  console.log(` Server is running on http://localhost:${PORT}`);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, async () => {
+  await connectionToDB();
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

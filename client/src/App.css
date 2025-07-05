@@ -1,0 +1,71 @@
+/* .outer-pokedex{
+    display: flex;
+    flex-direction:column; 
+    align-items:center ; 
+}
+#pokedex-heading {
+ margin: 0 auto;
+letter-spacing: 6px;  
+}
+
+a:visited {
+    color: black;
+} */
+
+/* App.css */
+
+/* App.css */
+/* App.css */
+.outer-pokedex {
+  position: relative; 
+  padding: 60px 20px;
+  min-height: 100vh;
+  text-align: center;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom right, #fff8f0, #ffd1c1);
+  color: #333;
+}
+
+.outer-pokedex {
+  min-height: 100vh;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+#pokedex-heading {
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 40px;
+  color: #ef5350;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 10px rgba(239, 83, 80, 0.2);
+}
+
+#pokedex-heading a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#pokedex-heading a:hover {
+  color: #b71c1c;
+}
+
+/* App.css - add at the bottom */
+
+.background-circle {
+  position: absolute;
+  top: -150px;
+  right: -150px;
+  width: 400px;
+  height: 400px;
+  background: #ffcdd2;
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.2;
+}

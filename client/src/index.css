@@ -1,7 +1,3 @@
-/* index.css */
-
-/* Reset */
-
 html, body {
   margin: 0;
   padding: 0;
@@ -14,7 +10,6 @@ html, body {
   box-sizing: border-box;
 }
 
-/* Body styling */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #fefefe;
@@ -22,13 +17,11 @@ body {
   line-height: 1.6;
 }
 
-/* Links */
 a {
   color: inherit;
   text-decoration: none;
 }
 
-/* Scrollbar styling (optional) */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -42,7 +35,6 @@ a {
   border-radius: 10px;
 }
 
-/* Root div */
 #root {
   display: flex;
   flex-direction: column;

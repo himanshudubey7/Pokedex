@@ -1,21 +1,3 @@
-/* .outer-pokedex{
-    display: flex;
-    flex-direction:column; 
-    align-items:center ; 
-}
-#pokedex-heading {
- margin: 0 auto;
-letter-spacing: 6px;  
-}
-
-a:visited {
-    color: black;
-} */
-
-/* App.css */
-
-/* App.css */
-/* App.css */
 .outer-pokedex {
   position: relative; 
   padding: 60px 20px;
@@ -56,7 +38,6 @@ body {
   color: #b71c1c;
 }
 
-/* App.css - add at the bottom */
 
 .background-circle {
   position: absolute;

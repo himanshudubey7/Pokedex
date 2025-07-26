@@ -1,0 +1,108 @@
+
+.home-layout {
+  min-height: 90vh;
+  position: relative;
+}
+
+.drawer {
+  position: absolute;
+  left: 0;
+  z-index: 50;
+  width: fit-content;
+}
+
+.drawer-toggle {
+  display: none;
+}
+
+.drawer-content {
+  position: relative;
+}
+
+.menu-icon {
+  margin: 16px;
+  cursor: pointer;
+  color: white;
+}
+
+.drawer-side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 0;
+  background-color: #f9f9f9;
+  overflow-x: hidden;
+  transition: 0.3s;
+}
+
+.drawer-toggle:checked ~ .drawer-side {
+  width: 240px;
+}
+
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 240px;
+  width: calc(100vw - 240px);
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.drawer-menu {
+  padding: 20px;
+  list-style: none;
+  height: 100%;
+  background: #fff;
+  color: #333;
+}
+
+.drawer-menu li {
+  margin-bottom: 12px;
+}
+
+.drawer-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.drawer-footer {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  gap: 10px;
+  width: 90%;
+}
+
+.btn {
+  padding: 8px 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+}
+
+.btn.login {
+  background-color: #007bff;
+}
+
+.btn.signup {
+  background-color: #e91e63;
+}
+
+.btn.login:hover {
+  background-color: #0056b3;
+}
+
+.btn.signup:hover {
+  background-color: #ad1457;
+}
+
+.main-content {
+  padding: 60px 16px 16px 16px;
+}
+

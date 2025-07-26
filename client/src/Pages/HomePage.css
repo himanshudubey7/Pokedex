@@ -1,0 +1,79 @@
+.home-container {
+  padding-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin: 0 64px;
+  height: 84vh;
+  color: white;
+}
+
+.home-left {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.home-left h1 {
+  font-size: 48px;
+  font-weight: 600;
+}
+
+.home-left h1 span {
+  color: #FFD700;
+  font-weight: 700;
+}
+
+.home-left p {
+  font-size: 20px;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.home-buttons {
+  display: flex;
+  gap: 24px;
+}
+
+.explore-btn,
+.contact-btn {
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.explore-btn {
+  background-color: #FFD700;
+  border: none;
+}
+
+.explore-btn:hover {
+  background-color: #e6c200;
+}
+
+.contact-btn {
+  border: 2px solid #FFD700;
+  background-color: transparent;
+  color: white;
+}
+
+.contact-btn:hover {
+  background-color: #e6c200;
+  color: black;
+}
+
+.home-right {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.home-right img {
+  max-width: 100%;
+  height: auto;
+}

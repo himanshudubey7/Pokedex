@@ -5,7 +5,7 @@ function PokemonDetails({ pokemonName}){
 
 const {id}= useParams();
 
-const [pokemon]= usePokemonDetails(id,pokemonName);
+const [pokemon]= usePokemonDetails(id||pokemonName);
 
 return (
 <div className="pokemon-details-wrapper">

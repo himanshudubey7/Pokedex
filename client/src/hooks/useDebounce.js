@@ -1,10 +1,11 @@
+import { useRef } from "react";
 function useDebounce(cb,delay=2000){
-  let timerId;
+  const timerRef = useRef();
 
 return (...args)=>{
     console.log(args);
-    clearTimeout (timerId);
-    timerId= setTimeout(()=>{
+    clearTimeout (timerRef.current);
+    timerRef.current = setTimeout(()=>{
         cb(...args);
     },delay);
 }

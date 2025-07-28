@@ -1,6 +1,6 @@
 import React from "react";
-import about from '../assets/about.png';
-import HomeLayout from "../Layouts/HomeLayout.jsx";
+import HomeLayout from "../Layouts/HomeLayout";
+import about from "../assets/about.png";
 import "./AboutUs.css";
 
 function AboutUs() {
@@ -33,3 +33,5 @@ function AboutUs() {
 }
 
 export default AboutUs;
+
+

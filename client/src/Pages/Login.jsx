@@ -1,89 +1,74 @@
-import { useState } from "react";
-import { toast } from "react-hot-toast";
+import React, { useState } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-
-import HomeLayout from "../Layouts/HomeLayout";
-import { login } from "../Redux/Slices/AuthSlice";
-
-import "./Login.css"; // Link to external CSS
+import axios from "axios";
+import "./Login.css";
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const fromProtected = location.state?.fromProtected;
 
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  function handleUserInput(e) {
-    const { name, value } = e.target;
-    setLoginData({
-      ...loginData,
-      [name]: value,
-    });
-  }
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/auth/login`, {
+        email,
+        password,
+      });
 
-  async function onLogin(event) {
-    event.preventDefault();
-
-    if (!loginData.email || !loginData.password) {
-      toast.error("Please fill all the details");
-      return;
+      const { token, user } = response.data;
+      localStorage.setItem("token", token);
+      dispatch({ type: "LOGIN_SUCCESS", payload: user });
+      navigate("/pokedex");
+    } catch (error) {
+      console.error("Login error:", error);
+      setErrorMsg("Invalid email or password. Please try again.");
     }
-
-    const response = await dispatch(login(loginData));
-    if (response?.payload?.success) navigate("/");
-
-    setLoginData({ email: "", password: "" });
-  }
+  };
 
   return (
-    <HomeLayout>
-      <div className="login-container">
-        <form onSubmit={onLogin} className="login-form">
-          <h1 className="login-title">Login Page</h1>
+    <div className="login-container">
+      <h2>Login Page</h2>
 
-          <div className="input-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              required
-              name="email"
-              id="email"
-              placeholder="Enter your email"
-              onChange={handleUserInput}
-              value={loginData.email}
-            />
-          </div>
+      {fromProtected && (
+        <p className="login-warning">⚠️ Please log in to access the Favorites page.</p>
+      )}
 
-          <div className="input-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              required
-              name="password"
-              id="password"
-              placeholder="Password"
-              onChange={handleUserInput}
-              value={loginData.password}
-            />
-          </div>
+      {errorMsg && <p className="login-error">{errorMsg}</p>}
 
-          <button type="submit" className="login-button">
-            Login
-          </button>
+      <form className="login-form" onSubmit={handleLogin}>
+        <label>Email</label>
+        <input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
-          <p className="login-footer">
-            Don't have an account?{" "}
-            <Link to="/signup" className="login-link">
-              Sign up
-            </Link>
-          </p>
-        </form>
-      </div>
-    </HomeLayout>
+        <label>Password</label>
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+
+        <button type="submit">Login</button>
+      </form>
+
+      <p>
+      Don’t have an account? <a href="/signup" className="signup-link">Sign up</a>
+      </p>
+
+    </div>
   );
 }
 

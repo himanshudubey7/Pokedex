@@ -72,6 +72,10 @@ function Signup() {
 
         <button type="submit">Create Account</button>
       </form>
+       <p>
+         Already have an account? <a href="/login" className="login-link"> Login</a>
+      </p>
+
     </div>
   );
 }

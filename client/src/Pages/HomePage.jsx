@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import HomePageMain from "../assets/HomePageMain.png";
 import HomeLayout from "../Layouts/HomeLayout";
-import "./HomePage.css"; // ⬅️ Linking the CSS file
+import HomePageMain from "../assets/HomePageMain.png";
+import "./HomePage.css";
 
 function HomePage() {
   return (
@@ -16,7 +16,7 @@ function HomePage() {
             Search by name, type, and stats. Dive into the world of Pokémon now!
           </p>
           <div className="home-buttons">
-            <Link to="/pokemon">
+            <Link to="/pokedex">
               <button className="explore-btn">Explore Pokémon</button>
             </Link>
 
@@ -34,3 +34,5 @@ function HomePage() {
 }
 
 export default HomePage;
+
+

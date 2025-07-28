@@ -27,14 +27,14 @@
 
 .about-heading {
   font-size: 2.5rem;
-  color: #facc15; /* Yellow-ish for Pokémon vibe */
+  color: #f1c514; /* Yellow-ish for Pokémon vibe */
   font-weight: 600;
   margin-bottom: 20px;
 }
 
 .about-description {
   font-size: 1.25rem;
-  color: #cccccc;
+  color: #688397;
   line-height: 1.6;
 }
 

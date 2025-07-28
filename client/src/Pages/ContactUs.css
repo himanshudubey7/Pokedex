@@ -1,5 +1,5 @@
-.signup-container {
-  max-width: 420px;
+.contact-container {
+  max-width: 500px;
   margin: 60px auto;
   padding: 30px 35px;
   background-color: #111111;
@@ -9,29 +9,30 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.signup-container h2 {
+.contact-container h2 {
   text-align: center;
-  margin-bottom: 25px;
   color: #facc15;
   font-size: 1.8rem;
   font-weight: bold;
+  margin-bottom: 25px;
 }
 
-.signup-form {
+.contact-form {
   display: flex;
   flex-direction: column;
 }
 
-.signup-form label {
+.contact-form label {
   display: flex;
   flex-direction: column;
   font-weight: 600;
   margin-bottom: 18px;
   font-size: 0.95rem;
+  gap: 6px;
 }
 
-.signup-form input {
-  margin-top: 6px;
+.contact-form input,
+.contact-form textarea {
   padding: 10px;
   border: none;
   border-radius: 6px;
@@ -42,11 +43,12 @@
   transition: border 0.3s ease;
 }
 
-.signup-form input:focus {
+.contact-form input:focus,
+.contact-form textarea:focus {
   border: 2px solid #facc15;
 }
 
-.signup-form button {
+.contact-form button {
   margin-top: 10px;
   background-color: #facc15;
   color: #000;
@@ -59,19 +61,6 @@
   transition: background-color 0.3s ease;
 }
 
-.signup-form button:hover {
+.contact-form button:hover {
   background-color: #eab308;
 }
-.login-link {
-  color: #facc15;
-  font-weight: bold;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.login-link:hover {
-  color: #eab308;
-  text-decoration: underline;
-}
-
-

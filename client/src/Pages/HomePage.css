@@ -6,7 +6,7 @@
   gap: 40px;
   margin: 0 64px;
   height: 84vh;
-  color: white;
+  color: rgb(96, 138, 150);
 }
 
 .home-left {
@@ -28,7 +28,7 @@
 
 .home-left p {
   font-size: 20px;
-  color: #ccc;
+  color: rgb(137, 176, 189);
   line-height: 1.6;
 }
 
@@ -59,7 +59,7 @@
 .contact-btn {
   border: 2px solid #FFD700;
   background-color: transparent;
-  color: white;
+  color: rgb(160, 183, 191);
 }
 
 .contact-btn:hover {

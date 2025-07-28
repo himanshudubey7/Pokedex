@@ -76,4 +76,5 @@
 .home-right img {
   max-width: 100%;
   height: auto;
+  flex: 1;
 }
